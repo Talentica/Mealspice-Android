@@ -20,13 +20,13 @@ public class DataManagerProvider {
         return new DataManager() {
             @Override
             public void fetchRestaurantDetails(String slug, Callback<Restaurant> callback) {
-                //callback.onResponse(TestUtils.getMockedRestaurant());
-                callback.onError(new Throwable("save me"));
+                callback.onResponse(TestUtils.getMockedRestaurant());
+               // callback.onError(new Throwable("save me"));
             }
 
             @Override
             public void fetchAllRestaurants(int page, Callback<List<Restaurant>> callback) {
-
+                callback.onResponse(TestUtils.getMockedRestaurantList());
             }
         };
     }
