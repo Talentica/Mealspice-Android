@@ -69,6 +69,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
     @Override
     public void loadRestaurantName(String name) {
         toolbar.setTitle(name);
+        imgRestaurant.setContentDescription(name);
         tvName.setText(name);
     }
 

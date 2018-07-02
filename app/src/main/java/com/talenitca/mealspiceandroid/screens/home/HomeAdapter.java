@@ -1,6 +1,7 @@
 package com.talenitca.mealspiceandroid.screens.home;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,11 @@ import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.FeedViewHolder> {
     private List<Restaurant> mRestaurants;
+    private IRestaurantListClickListener mListener;
+
+    public HomeAdapter(IRestaurantListClickListener listener) {
+        mListener = listener;
+    }
 
     public void setData(List<Restaurant> restaurants) {
         this.mRestaurants = restaurants;
@@ -46,6 +52,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.FeedViewHolder
         private TextView restaurantAddress;
         private TextView restaurantDetails;
         private ImageView restaurantImage;
+        private CardView mCardView;
 
         public FeedViewHolder(View itemView) {
             super(itemView);
@@ -53,13 +60,24 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.FeedViewHolder
             restaurantAddress = itemView.findViewById(R.id.restaurant_address);
             restaurantDetails = itemView.findViewById(R.id.restaurant_info);
             restaurantImage = itemView.findViewById(R.id.restaurant_image);
+            mCardView = itemView.findViewById(R.id.parent_cardview);
         }
 
-        public void bind(Restaurant restaurant) {
+        public void bind(final Restaurant restaurant) {
             restaurantName.setText(restaurant.getName());
             restaurantAddress.setText(restaurant.getAddress());
             restaurantDetails.setText("Established on : " + restaurant.getEstablished());
-            Picasso.with(restaurantImage.getContext()).load(restaurant.getPic()).centerCrop().fit().into(restaurantImage);
+            Picasso.with(restaurantImage.getContext())
+                    .load(restaurant.getPic())
+                    .placeholder(R.mipmap.ic_launcher)
+                    .centerCrop().fit().into(restaurantImage);
+
+            mCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onRestaurantClicked(restaurant.getSlug());
+                }
+            });
         }
     }
 }

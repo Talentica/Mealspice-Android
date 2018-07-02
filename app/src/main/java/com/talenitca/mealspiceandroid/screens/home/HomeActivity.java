@@ -16,7 +16,10 @@ import com.talenitca.mealspiceandroid.screens.details.DetailsContract;
 
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements HomeContract.View {
+interface IRestaurantListClickListener{
+    public void onRestaurantClicked(String slug);
+}
+public class HomeActivity extends AppCompatActivity implements HomeContract.View,IRestaurantListClickListener {
 
     private RecyclerView mRecyclerView;
     private HomeAdapter mAdapter;
@@ -30,7 +33,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
         mRecyclerView = findViewById(R.id.activity_home_recyclerview);
         mProgressBar = findViewById(R.id.activity_home_progressbar);
 
-        mAdapter = new HomeAdapter();
+        mAdapter = new HomeAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mPresenter = new HomePresenter(this);
@@ -67,5 +70,12 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     @Override
     public DetailsContract.Presenter getPresenter() {
         return null;
+    }
+
+    @Override
+    public void onRestaurantClicked(String slug) {
+        Intent intent = new Intent(this,DetailsActivity.class);
+        intent.putExtra("slug",slug);
+        startActivity(intent);
     }
 }

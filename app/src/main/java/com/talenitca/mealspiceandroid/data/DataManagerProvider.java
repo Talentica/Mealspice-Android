@@ -1,5 +1,6 @@
 package com.talenitca.mealspiceandroid.data;
 
+import com.talenitca.mealspiceandroid.BuildConfig;
 import com.talenitca.mealspiceandroid.data.models.Restaurant;
 import com.talenitca.mealspiceandroid.utils.TestUtils;
 
@@ -7,21 +8,24 @@ import java.util.List;
 
 public class DataManagerProvider {
 
-    public static DataManager provide(){
-//        return getMockImplementation();
-         return getRealImplementation();
+    public static DataManager provide() {
+        if (BuildConfig.FLAVOR.equals("mock")) {
+            return getMockImplementation();
+        } else {
+            return getRealImplementation();
+        }
     }
 
-    private static DataManager getRealImplementation(){
+    private static DataManager getRealImplementation() {
         return new AppDataManager();
     }
 
-    private static DataManager getMockImplementation(){
+    private static DataManager getMockImplementation() {
         return new DataManager() {
             @Override
             public void fetchRestaurantDetails(String slug, Callback<Restaurant> callback) {
                 callback.onResponse(TestUtils.getMockedRestaurant());
-               // callback.onError(new Throwable("save me"));
+                // callback.onError(new Throwable("save me"));
             }
 
             @Override
