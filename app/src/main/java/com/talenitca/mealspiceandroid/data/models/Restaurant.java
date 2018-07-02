@@ -4,6 +4,7 @@ package com.talenitca.mealspiceandroid.data.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant {
@@ -43,6 +44,12 @@ public class Restaurant {
     @SerializedName("_id")
     private String m_id;
 
+    public void addComment(Comment comment){
+        if(mComments == null) {
+            mComments = new ArrayList<>();
+        }
+        mComments.add(comment);
+    }
     public String getAddress() {
         return mAddress;
     }

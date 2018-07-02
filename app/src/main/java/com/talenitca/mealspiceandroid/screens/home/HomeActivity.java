@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.talenitca.mealspiceandroid.R;
 import com.talenitca.mealspiceandroid.data.models.Restaurant;
@@ -50,7 +51,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
     @Override
     public void onError(Throwable throwable) {
-
+        Toast.makeText(this,throwable.getLocalizedMessage(),Toast.LENGTH_LONG).show();
     }
 
     @Override
