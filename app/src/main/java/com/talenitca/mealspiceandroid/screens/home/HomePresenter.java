@@ -1,7 +1,6 @@
 package com.talenitca.mealspiceandroid.screens.home;
 
 import com.talenitca.mealspiceandroid.data.DataManager;
-import com.talenitca.mealspiceandroid.data.DataManagerProvider;
 import com.talenitca.mealspiceandroid.data.models.Restaurant;
 
 import java.util.List;
@@ -11,9 +10,9 @@ public class HomePresenter implements HomeContract.Presenter {
     private HomeContract.View view;
     private DataManager dataManager;
 
-    public HomePresenter(HomeContract.View view) {
+    public HomePresenter(HomeContract.View view, DataManager dataManager) {
         this.view = view;
-        dataManager = DataManagerProvider.provide();
+        this.dataManager = dataManager;
     }
 
 
@@ -37,6 +36,10 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void destroy() {
+    view = null;
+    }
 
+    public HomeContract.View getView() {
+        return view;
     }
 }

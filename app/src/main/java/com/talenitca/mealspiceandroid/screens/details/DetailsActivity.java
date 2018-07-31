@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.talenitca.mealspiceandroid.R;
+import com.talenitca.mealspiceandroid.data.AppDataManager;
 
 public class DetailsActivity extends AppCompatActivity implements DetailsContract.View {
 
@@ -36,7 +37,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
             return;
         }
 
-        presenter = new DetailsPresenter(this);
+        presenter = new DetailsPresenter(this,new AppDataManager());
         presenter.start(extras.getString("slug"));
     }
 

@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.talenitca.mealspiceandroid.R;
+import com.talenitca.mealspiceandroid.data.AppDataManager;
 import com.talenitca.mealspiceandroid.data.models.Restaurant;
 import com.talenitca.mealspiceandroid.screens.details.DetailsActivity;
 import com.talenitca.mealspiceandroid.screens.details.DetailsContract;
@@ -25,7 +26,6 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     private HomeAdapter mAdapter;
     private HomeContract.Presenter mPresenter;
     private ProgressBar mProgressBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
         mAdapter = new HomeAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        mPresenter = new HomePresenter(this);
+        mPresenter = new HomePresenter(this, new AppDataManager());
         mPresenter.fetchAllData();
     }
 

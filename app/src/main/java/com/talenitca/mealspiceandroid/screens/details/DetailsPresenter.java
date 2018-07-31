@@ -1,7 +1,6 @@
 package com.talenitca.mealspiceandroid.screens.details;
 
 import com.talenitca.mealspiceandroid.data.DataManager;
-import com.talenitca.mealspiceandroid.data.DataManagerProvider;
 import com.talenitca.mealspiceandroid.data.models.Restaurant;
 
 public class DetailsPresenter implements DetailsContract.Presenter {
@@ -9,9 +8,9 @@ public class DetailsPresenter implements DetailsContract.Presenter {
     private DetailsContract.View view;
     private DataManager dataManager;
 
-    public DetailsPresenter(DetailsContract.View view) {
+    public DetailsPresenter(DetailsContract.View view, DataManager dataManager) {
         this.view = view;
-        dataManager = DataManagerProvider.provide();
+        this.dataManager = dataManager;
     }
 
     @Override
@@ -49,6 +48,10 @@ public class DetailsPresenter implements DetailsContract.Presenter {
 
     @Override
     public void destroy() {
+        this.view = null;
+    }
 
+    public DetailsContract.View getView() {
+        return view;
     }
 }

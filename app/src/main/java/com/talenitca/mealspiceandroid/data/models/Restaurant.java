@@ -1,7 +1,6 @@
 
 package com.talenitca.mealspiceandroid.data.models;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -43,6 +42,13 @@ public class Restaurant {
     private String mUpdated;
     @SerializedName("_id")
     private String m_id;
+
+    public Restaurant() {
+    }
+
+    public Restaurant(String mName) {
+        this.mName = mName;
+    }
 
     public void addComment(Comment comment){
         if(mComments == null) {
@@ -186,4 +192,49 @@ public class Restaurant {
         m_id = _id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Restaurant)) return false;
+
+        Restaurant that = (Restaurant) o;
+
+        if (!mAddress.equals(that.mAddress)) return false;
+        if (!mCity.equals(that.mCity)) return false;
+        if (!mCountry.equals(that.mCountry)) return false;
+        if (!mCuisine.equals(that.mCuisine)) return false;
+        if (!mEmail.equals(that.mEmail)) return false;
+        if (!mEstablished.equals(that.mEstablished)) return false;
+        if (!mHasBranches.equals(that.mHasBranches)) return false;
+        if (!mLatitude.equals(that.mLatitude)) return false;
+        if (!mLongitude.equals(that.mLongitude)) return false;
+        if (!mName.equals(that.mName)) return false;
+        if (!mPic.equals(that.mPic)) return false;
+        if (!mRating.equals(that.mRating)) return false;
+        if (!mSlug.equals(that.mSlug)) return false;
+        if (!mTagline.equals(that.mTagline)) return false;
+        if (!mUpdated.equals(that.mUpdated)) return false;
+        return m_id.equals(that.m_id);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = mAddress.hashCode();
+        result = 31 * result + mCity.hashCode();
+        result = 31 * result + mCountry.hashCode();
+        result = 31 * result + mCuisine.hashCode();
+        result = 31 * result + mEmail.hashCode();
+        result = 31 * result + mEstablished.hashCode();
+        result = 31 * result + mHasBranches.hashCode();
+        result = 31 * result + mLatitude.hashCode();
+        result = 31 * result + mLongitude.hashCode();
+        result = 31 * result + mName.hashCode();
+        result = 31 * result + mPic.hashCode();
+        result = 31 * result + mRating.hashCode();
+        result = 31 * result + mSlug.hashCode();
+        result = 31 * result + mTagline.hashCode();
+        result = 31 * result + mUpdated.hashCode();
+        result = 31 * result + m_id.hashCode();
+        return result;
+    }
 }

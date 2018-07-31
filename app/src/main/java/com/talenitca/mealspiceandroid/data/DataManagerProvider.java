@@ -16,11 +16,11 @@ public class DataManagerProvider {
         }
     }
 
-    private static DataManager getRealImplementation() {
+    public static DataManager getRealImplementation() {
         return new AppDataManager();
     }
 
-    private static DataManager getMockImplementation() {
+    public static DataManager getMockImplementation() {
         return new DataManager() {
             @Override
             public void fetchRestaurantDetails(String slug, Callback<Restaurant> callback) {
@@ -31,6 +31,21 @@ public class DataManagerProvider {
             @Override
             public void fetchAllRestaurants(int page, Callback<List<Restaurant>> callback) {
                 callback.onResponse(TestUtils.getMockedRestaurantList());
+            }
+        };
+    }
+    public static DataManager getMockErrorImplementation() {
+        return new DataManager() {
+            @Override
+            public void fetchRestaurantDetails(String slug, Callback<Restaurant> callback) {
+                //callback.onResponse(TestUtils.getMockedRestaurant());
+                 callback.onError(new Throwable("save me"));
+            }
+
+            @Override
+            public void fetchAllRestaurants(int page, Callback<List<Restaurant>> callback) {
+               // callback.onResponse(TestUtils.getMockedRestaurantList());
+                callback.onError(new Throwable("save me"));
             }
         };
     }

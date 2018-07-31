@@ -7,7 +7,7 @@ import com.talenitca.mealspiceandroid.data.network.retrofit.RetrofitNWManager;
 
 import java.util.List;
 
-class AppDataManager implements DataManager {
+public class AppDataManager implements DataManager {
     @Override
     public void fetchRestaurantDetails(String slug, Callback<Restaurant> callback) {
         if (BuildConfig.FLAVOR.equals("httpUrl")) {
