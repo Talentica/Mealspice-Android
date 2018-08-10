@@ -15,29 +15,31 @@
 
 
         <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:contentScrim="@color/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="true">
 
             <ImageView
                 android:id="@+id/collapsing_toolbar_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:contentDescription="@string/app_name"
                 android:alpha="1.0"
+                android:contentDescription="@string/app_name"
+                android:minHeight="100dp"
                 android:scaleType="fitCenter"
-                tools:src="@drawable/sample_restaurant"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                tools:src="@drawable/sample_restaurant" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar_details"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="?android:attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:title="Big Lobster"
                 app:titleTextColor="#FFFFFF">
 
             </android.support.v7.widget.Toolbar>

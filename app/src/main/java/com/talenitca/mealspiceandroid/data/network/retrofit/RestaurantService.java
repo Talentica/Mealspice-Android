@@ -4,22 +4,17 @@ import com.talenitca.mealspiceandroid.data.models.Restaurant;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Url;
 
 public interface RestaurantService {
 
     @GET("restaurants")
-    public Call<List<Restaurant>> fetchAllRestaurants();
+    Observable<List<Restaurant>> fetchAllRestaurants();
 
-    @GET
-    public Call<Restaurant> fetchRestaurantDetails(@Url String slug);
+    @GET("restaurant/{slug}")
+    Observable<Restaurant> fetchRestaurantDetails(@Path("slug") String slug);
 
-    public static final Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://pmd-test-app-001.herokuapp.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
 }

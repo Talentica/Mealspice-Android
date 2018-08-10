@@ -1,28 +1,31 @@
 package com.talenitca.mealspiceandroid.data;
 
-import com.talenitca.mealspiceandroid.BuildConfig;
 import com.talenitca.mealspiceandroid.data.models.Restaurant;
-import com.talenitca.mealspiceandroid.data.network.httpurl.HttpUrlNWManager;
+import com.talenitca.mealspiceandroid.data.network.retrofit.RestaurantService;
 import com.talenitca.mealspiceandroid.data.network.retrofit.RetrofitNWManager;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import io.reactivex.Observable;
+
 public class AppDataManager implements DataManager {
-    @Override
-    public void fetchRestaurantDetails(String slug, Callback<Restaurant> callback) {
-        if (BuildConfig.FLAVOR.equals("httpUrl")) {
-            new HttpUrlNWManager().fetchRestaurantDetails(slug, callback);
-        }else{
-            new RetrofitNWManager().fetchRestaurantDetails(slug, callback);
-        }
+
+    private RestaurantService restaurantService;
+
+    @Inject
+    AppDataManager(RestaurantService restaurantService) {
+        this.restaurantService = restaurantService;
     }
 
     @Override
-    public void fetchAllRestaurants(int page, Callback<List<Restaurant>> callback) {
-        if (BuildConfig.FLAVOR.equals("httpUrl")) {
-            new HttpUrlNWManager().fetchAllRestaurants(page, callback);
-        } else {
-            new RetrofitNWManager().fetchAllRestaurants(page, callback);
-        }
+    public Observable<Restaurant> fetchRestaurantDetails(String slug) {
+        return restaurantService.fetchRestaurantDetails(slug);
+    }
+
+    @Override
+    public Observable<List<Restaurant>> fetchAllRestaurants(int page) {
+        return restaurantService.fetchAllRestaurants();
     }
 }

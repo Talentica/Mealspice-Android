@@ -4,11 +4,13 @@ import com.talenitca.mealspiceandroid.data.models.Restaurant;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+
 public interface DataManager {
 
-    void fetchRestaurantDetails(String slug, Callback<Restaurant> callback);
+    Observable<Restaurant> fetchRestaurantDetails(String slug);
 
-    void fetchAllRestaurants(int page, Callback<List<Restaurant>> callback);
+    Observable<List<Restaurant>> fetchAllRestaurants(int page);
 
     interface Callback<T> {
         void onResponse(T result);

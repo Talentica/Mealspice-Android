@@ -75,9 +75,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.FeedViewHolder
             mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onRestaurantClicked(restaurant.getSlug());
+                    mListener.onRestaurantClicked(restaurant);
                 }
             });
         }
+    }
+
+    interface IRestaurantListClickListener{
+        void onRestaurantClicked(Restaurant restaurant);
     }
 }

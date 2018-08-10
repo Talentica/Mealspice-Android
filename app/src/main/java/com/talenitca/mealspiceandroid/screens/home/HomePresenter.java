@@ -2,41 +2,60 @@ package com.talenitca.mealspiceandroid.screens.home;
 
 import com.talenitca.mealspiceandroid.data.DataManager;
 import com.talenitca.mealspiceandroid.data.models.Restaurant;
+import com.talenitca.mealspiceandroid.di.Background;
+import com.talenitca.mealspiceandroid.di.Foreground;
 
-import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import io.reactivex.Scheduler;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class HomePresenter implements HomeContract.Presenter {
 
     private HomeContract.View view;
     private DataManager dataManager;
+    private Scheduler backgroundScheduler, foregroundScheduler;
 
-    public HomePresenter(HomeContract.View view, DataManager dataManager) {
+    private CompositeDisposable compositeDisposable;
+
+    @Inject
+    public HomePresenter(HomeContract.View view, DataManager dataManager,
+                         @Background Scheduler backgroundScheduler,
+                         @Foreground Scheduler foregroundScheduler) {
         this.view = view;
         this.dataManager = dataManager;
+        this.backgroundScheduler = backgroundScheduler;
+        this.foregroundScheduler = foregroundScheduler;
+        compositeDisposable = new CompositeDisposable();
     }
 
 
     @Override
     public void fetchAllData() {
         view.showLoading();
-        dataManager.fetchAllRestaurants(1, new DataManager.Callback<List<Restaurant>>() {
-            @Override
-            public void onResponse(List<Restaurant> result) {
-                view.hideLoading();
-                view.loadRestaurants(result);
-            }
+        compositeDisposable.add(
+                dataManager.fetchAllRestaurants(1)
+                        .subscribeOn(backgroundScheduler)
+                        .observeOn(foregroundScheduler)
+                        .doOnComplete(() -> view.hideLoading())
+                        .subscribe(restaurants -> view.loadRestaurants(restaurants),
+                                throwable -> {
+                                    view.onError(throwable);
+                                    view.hideLoading();
+                                })
+        );
+    }
 
-            @Override
-            public void onError(Throwable throwable) {
-                view.hideLoading();
-                view.onError(throwable);
-            }
-        });
+    @Override
+    public void onRestaurantClicked(Restaurant restaurant) {
+        view.navigateToDetails(restaurant);
     }
 
     @Override
     public void destroy() {
-    view = null;
+        view = null;
+        compositeDisposable.dispose();
     }
 
     public HomeContract.View getView() {

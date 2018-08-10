@@ -1,13 +1,13 @@
 package com.talenitca.mealspiceandroid.screens.details;
 
 import com.talenitca.mealspiceandroid.data.DataManager;
-import com.talenitca.mealspiceandroid.data.DataManagerProvider;
-import com.talenitca.mealspiceandroid.utils.TestUtils;
+import com.talenitca.mealspiceandroid.data.network.retrofit.RestaurantService;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -24,13 +24,16 @@ public class DetailsPresenterErrorTest {
     @Mock
     DetailsContract.View view;
 
+    @Mock
+    RestaurantService restaurantService;
+
+    @InjectMocks
     DataManager dataManager;
 
     private DetailsPresenter presenter;
 
     @Before
     public void setUp() throws Exception {
-        dataManager = DataManagerProvider.getMockErrorImplementation();
         presenter = new DetailsPresenter(view, dataManager);
 
     }
@@ -49,6 +52,7 @@ public class DetailsPresenterErrorTest {
         verify(view, times(1)).hideLoading();
         verify(view, times(1)).onError(captor.capture());
     }
+
     @Test
     public void checkfICorrectErrorPassed() {
 /*        ArgumentCaptor<String> captor2 = forClass(String.class);

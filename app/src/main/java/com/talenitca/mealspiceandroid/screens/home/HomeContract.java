@@ -13,9 +13,13 @@ public interface HomeContract {
         void loadRestaurants(List<Restaurant> restaurantList);
 
         void onError(Throwable throwable);
+
+        void navigateToDetails(Restaurant restaurant);
     }
 
     interface Presenter extends BasePresenter {
         void fetchAllData();
+
+        void onRestaurantClicked(Restaurant restaurant);
     }
 }

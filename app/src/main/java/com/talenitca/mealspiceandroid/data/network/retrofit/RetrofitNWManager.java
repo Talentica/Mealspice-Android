@@ -29,36 +29,36 @@ public class RetrofitNWManager {
     }
 
     public void fetchRestaurantDetails(String slug, final DataManager.Callback<Restaurant> callback) {
-        RestaurantService restaurantService = RestaurantService.retrofit.create(RestaurantService.class);
-        Call<Restaurant> restaurantDetailsCall = restaurantService.fetchRestaurantDetails("restaurant/"+slug);
-        restaurantDetailsCall.enqueue(new Callback<Restaurant>() {
-            @Override
-            public void onResponse(Call<Restaurant> call, Response<Restaurant> response) {
-                callback.onResponse(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<Restaurant> call, Throwable t) {
-                callback.onError(t);
-            }
-        });
+//        RestaurantService restaurantService = RestaurantService.retrofit.create(RestaurantService.class);
+//        Call<Restaurant> restaurantDetailsCall = restaurantService.fetchRestaurantDetails("restaurant/"+slug);
+//        restaurantDetailsCall.enqueue(new Callback<Restaurant>() {
+//            @Override
+//            public void onResponse(Call<Restaurant> call, Response<Restaurant> response) {
+//                callback.onResponse(response.body());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Restaurant> call, Throwable t) {
+//                callback.onError(t);
+//            }
+//        });
     }
 
 
     public void fetchAllRestaurants(int page, final DataManager.Callback<List<Restaurant>> callback) {
-        RestaurantService restaurantService = RestaurantService.retrofit.create(RestaurantService.class);
-        Call<List<Restaurant>> restaurantCall = restaurantService.fetchAllRestaurants();
-        restaurantCall.enqueue(new Callback<List<Restaurant>>() {
-            @Override
-            public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
-                callback.onResponse(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<Restaurant>> call, Throwable t) {
-                callback.onError(t);
-            }
-        });
+//        RestaurantService restaurantService = RestaurantService.retrofit.create(RestaurantService.class);
+//        Call<List<Restaurant>> restaurantCall = restaurantService.fetchAllRestaurants();
+//        restaurantCall.enqueue(new Callback<List<Restaurant>>() {
+//            @Override
+//            public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
+//                callback.onResponse(response.body());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Restaurant>> call, Throwable t) {
+//                callback.onError(t);
+//            }
+//        });
 
     }
 }
