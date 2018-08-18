@@ -1,195 +1,223 @@
 
 package com.talenitca.mealspiceandroid.data.models;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity(tableName = "restaurants")
 public class Restaurant {
 
-    @SerializedName("address")
-    private String mAddress;
-    @SerializedName("city")
-    private String mCity;
-    @SerializedName("comments")
-    private List<Comment> mComments;
-    @SerializedName("country")
-    private String mCountry;
-    @SerializedName("cuisine")
-    private String mCuisine;
-    @SerializedName("email")
-    private String mEmail;
-    @SerializedName("established")
-    private Long mEstablished;
-    @SerializedName("hasBranches")
-    private Boolean mHasBranches;
-    @SerializedName("latitude")
-    private String mLatitude;
-    @SerializedName("longitude")
-    private String mLongitude;
-    @SerializedName("name")
-    private String mName;
-    @SerializedName("pic")
-    private String mPic;
-    @SerializedName("rating")
-    private Long mRating;
-    @SerializedName("slug")
-    private String mSlug;
-    @SerializedName("tagline")
-    private String mTagline;
-    @SerializedName("updated")
-    private String mUpdated;
+    @PrimaryKey
     @SerializedName("_id")
-    private String m_id;
+    private @NonNull
+    String id;
+
+    @SerializedName("address")
+    private String address;
+
+    @SerializedName("city")
+    private String city;
+
+    @Ignore
+    @SerializedName("comments")
+    private List<Comment> comments;
+
+    @SerializedName("country")
+    private String country;
+
+    @SerializedName("cuisine")
+    private String cuisine;
+
+    @SerializedName("email")
+    private String email;
+
+    @SerializedName("established")
+    private Long established;
+
+    @SerializedName("hasBranches")
+    private Boolean hasBranches;
+
+    @SerializedName("latitude")
+    private String latitude;
+
+    @SerializedName("longitude")
+    private String longitude;
+
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("pic")
+    private String pic;
+
+    @SerializedName("rating")
+    private Long rating;
+
+    @SerializedName("slug")
+    private String slug;
+
+    @SerializedName("tagline")
+    private String tagline;
+
+    @SerializedName("updated")
+    private String updated;
 
     public Restaurant() {
+
     }
 
-    public Restaurant(String mName) {
-        this.mName = mName;
+    @Ignore
+    public Restaurant(String name) {
+        this.name = name;
     }
 
-    public void addComment(Comment comment){
-        if(mComments == null) {
-            mComments = new ArrayList<>();
+    public void addComment(Comment comment) {
+        if (comments == null) {
+            comments = new ArrayList<>();
         }
-        mComments.add(comment);
+        comments.add(comment);
     }
+
     public String getAddress() {
-        return mAddress;
+        return address;
     }
 
     public void setAddress(String address) {
-        mAddress = address;
+        this.address = address;
     }
 
     public String getCity() {
-        return mCity;
+        return city;
     }
 
     public void setCity(String city) {
-        mCity = city;
+        this.city = city;
     }
 
     public List<Comment> getComments() {
-        return mComments;
+        return comments;
     }
 
     public void setComments(List<Comment> comments) {
-        mComments = comments;
+        this.comments = comments;
     }
 
     public String getCountry() {
-        return mCountry;
+        return country;
     }
 
     public void setCountry(String country) {
-        mCountry = country;
+        this.country = country;
     }
 
     public String getCuisine() {
-        return mCuisine;
+        return cuisine;
     }
 
     public void setCuisine(String cuisine) {
-        mCuisine = cuisine;
+        this.cuisine = cuisine;
     }
 
     public String getEmail() {
-        return mEmail;
+        return email;
     }
 
     public void setEmail(String email) {
-        mEmail = email;
+        this.email = email;
     }
 
     public Long getEstablished() {
-        return mEstablished;
+        return established;
     }
 
     public void setEstablished(Long established) {
-        mEstablished = established;
+        this.established = established;
     }
 
     public Boolean getHasBranches() {
-        return mHasBranches;
+        return hasBranches;
     }
 
     public void setHasBranches(Boolean hasBranches) {
-        mHasBranches = hasBranches;
+        this.hasBranches = hasBranches;
     }
 
     public String getLatitude() {
-        return mLatitude;
+        return latitude;
     }
 
     public void setLatitude(String latitude) {
-        mLatitude = latitude;
+        this.latitude = latitude;
     }
 
     public String getLongitude() {
-        return mLongitude;
+        return longitude;
     }
 
     public void setLongitude(String longitude) {
-        mLongitude = longitude;
+        this.longitude = longitude;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName(String name) {
-        mName = name;
+        this.name = name;
     }
 
     public String getPic() {
-        return mPic;
+        return pic;
     }
 
     public void setPic(String pic) {
-        mPic = pic;
+        this.pic = pic;
     }
 
     public Long getRating() {
-        return mRating;
+        return rating;
     }
 
     public void setRating(Long rating) {
-        mRating = rating;
+        this.rating = rating;
     }
 
     public String getSlug() {
-        return mSlug;
+        return slug;
     }
 
     public void setSlug(String slug) {
-        mSlug = slug;
+        this.slug = slug;
     }
 
     public String getTagline() {
-        return mTagline;
+        return tagline;
     }
 
     public void setTagline(String tagline) {
-        mTagline = tagline;
+        this.tagline = tagline;
     }
 
     public String getUpdated() {
-        return mUpdated;
+        return updated;
     }
 
     public void setUpdated(String updated) {
-        mUpdated = updated;
+        this.updated = updated;
     }
 
     public String getId() {
-        return m_id;
+        return id;
     }
 
     public void setId(String _id) {
-        m_id = _id;
+        id = _id;
     }
 
     @Override
@@ -199,42 +227,42 @@ public class Restaurant {
 
         Restaurant that = (Restaurant) o;
 
-        if (!mAddress.equals(that.mAddress)) return false;
-        if (!mCity.equals(that.mCity)) return false;
-        if (!mCountry.equals(that.mCountry)) return false;
-        if (!mCuisine.equals(that.mCuisine)) return false;
-        if (!mEmail.equals(that.mEmail)) return false;
-        if (!mEstablished.equals(that.mEstablished)) return false;
-        if (!mHasBranches.equals(that.mHasBranches)) return false;
-        if (!mLatitude.equals(that.mLatitude)) return false;
-        if (!mLongitude.equals(that.mLongitude)) return false;
-        if (!mName.equals(that.mName)) return false;
-        if (!mPic.equals(that.mPic)) return false;
-        if (!mRating.equals(that.mRating)) return false;
-        if (!mSlug.equals(that.mSlug)) return false;
-        if (!mTagline.equals(that.mTagline)) return false;
-        if (!mUpdated.equals(that.mUpdated)) return false;
-        return m_id.equals(that.m_id);
+        if (!address.equals(that.address)) return false;
+        if (!city.equals(that.city)) return false;
+        if (!country.equals(that.country)) return false;
+        if (!cuisine.equals(that.cuisine)) return false;
+        if (!email.equals(that.email)) return false;
+        if (!established.equals(that.established)) return false;
+        if (!hasBranches.equals(that.hasBranches)) return false;
+        if (!latitude.equals(that.latitude)) return false;
+        if (!longitude.equals(that.longitude)) return false;
+        if (!name.equals(that.name)) return false;
+        if (!pic.equals(that.pic)) return false;
+        if (!rating.equals(that.rating)) return false;
+        if (!slug.equals(that.slug)) return false;
+        if (!tagline.equals(that.tagline)) return false;
+        if (!updated.equals(that.updated)) return false;
+        return id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        int result = mAddress.hashCode();
-        result = 31 * result + mCity.hashCode();
-        result = 31 * result + mCountry.hashCode();
-        result = 31 * result + mCuisine.hashCode();
-        result = 31 * result + mEmail.hashCode();
-        result = 31 * result + mEstablished.hashCode();
-        result = 31 * result + mHasBranches.hashCode();
-        result = 31 * result + mLatitude.hashCode();
-        result = 31 * result + mLongitude.hashCode();
-        result = 31 * result + mName.hashCode();
-        result = 31 * result + mPic.hashCode();
-        result = 31 * result + mRating.hashCode();
-        result = 31 * result + mSlug.hashCode();
-        result = 31 * result + mTagline.hashCode();
-        result = 31 * result + mUpdated.hashCode();
-        result = 31 * result + m_id.hashCode();
+        int result = address.hashCode();
+        result = 31 * result + city.hashCode();
+        result = 31 * result + country.hashCode();
+        result = 31 * result + cuisine.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + established.hashCode();
+        result = 31 * result + hasBranches.hashCode();
+        result = 31 * result + latitude.hashCode();
+        result = 31 * result + longitude.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + pic.hashCode();
+        result = 31 * result + rating.hashCode();
+        result = 31 * result + slug.hashCode();
+        result = 31 * result + tagline.hashCode();
+        result = 31 * result + updated.hashCode();
+        result = 31 * result + id.hashCode();
         return result;
     }
 }

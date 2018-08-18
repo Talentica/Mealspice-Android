@@ -42,6 +42,16 @@
                 app:layout_collapseMode="pin"
                 app:titleTextColor="#FFFFFF">
 
+                <ImageView
+                    android:id="@+id/img_detail_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:contentDescription="@string/text_favourite_icon"
+                    android:padding="@dimen/margin_medium"
+                    android:src="@drawable/ic_star_empty" />
+
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -49,7 +59,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_favorite"
+        android:id="@+id/fab_edit_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -87,7 +97,6 @@
                 android:enabled="false"
                 android:hint="Restaurant name"
                 android:inputType="text"
-                android:text="Lombardi's Pizza"
                 android:textColor="@color/darkGray"
                 android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,13 +108,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:enabled="false"
                 android:hint="Carnival of spices and herbs"
                 android:inputType="text"
-                android:text="The paradise of spice blends"
                 android:textColor="@color/lightGray"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_name" />
 
@@ -116,11 +124,13 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:ellipsize="end"
                 android:enabled="false"
-                android:hint="Which street, which drive, country?"
-                android:inputType="textPostalAddress"
-                android:text="32 Spring Street, New York 10012, USA"
-                android:textColor="@color/lightGray"
+                android:hint="Which street, which drive, country?khghgjhgjhgjhgjhgjhgjhghjgjhghgjhgjh"
+                android:inputType="textPostalAddress|textMultiLine"
+                android:scrollHorizontally="false"
+                android:singleLine="false"
+                android:textColor="@color/almostBlack"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_tagline" />
@@ -135,7 +145,6 @@
                 android:enabled="false"
                 android:hint="Indian, Thai, Mexican"
                 android:inputType="textPostalAddress"
-                android:text="Indian, Thai, Mexican"
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"

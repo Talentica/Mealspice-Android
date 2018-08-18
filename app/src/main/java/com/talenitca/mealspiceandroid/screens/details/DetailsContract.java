@@ -19,13 +19,17 @@ public interface DetailsContract {
         void loadCuisine(String cuisine);
 
         void onError(Throwable throwable);
+
+        void setFavouriteStatus(boolean status);
+
+        void dismissWithMessage(String message);
     }
 
     interface Presenter extends BasePresenter {
         void start(String restaurantSlug);
 
-        void onEditTapped();
+        void onSaveTapped(String name, String tagLine, String location, String cuisine);
 
-        void onSaveTapped();
+        void onFavouriteTapped();
     }
 }

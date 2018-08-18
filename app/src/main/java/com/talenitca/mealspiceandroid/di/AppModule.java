@@ -3,9 +3,9 @@ package com.talenitca.mealspiceandroid.di;
 import android.app.Application;
 import android.content.Context;
 
-import com.talenitca.mealspiceandroid.data.DataManager;
+import com.talenitca.mealspiceandroid.data.local.RestauranDB;
+import com.talenitca.mealspiceandroid.data.local.RestaurantDAO;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -19,7 +19,7 @@ public class AppModule {
 
     private final Application mApp;
 
-    public AppModule(Application app){
+    public AppModule(Application app) {
         this.mApp = app;
     }
 
@@ -33,6 +33,12 @@ public class AppModule {
     @Singleton
     Context providesContext() {
         return mApp.getApplicationContext();
+    }
+
+    @Provides
+    @Singleton
+    RestaurantDAO providesRestaurantDao() {
+        return RestauranDB.getInstance(mApp).restaurantDAO();
     }
 
     @Provides

@@ -49,6 +49,10 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
                 .build()
                 .inject(this);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.txt_restautant_list);
+        }
+
         mPresenter.fetchAllData();
     }
 
