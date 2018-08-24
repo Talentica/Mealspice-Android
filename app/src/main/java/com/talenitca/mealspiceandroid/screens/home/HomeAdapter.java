@@ -19,9 +19,6 @@ import com.talenitca.mealspiceandroid.data.models.Restaurant;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.FeedViewHolder> {
     private List<Restaurant> mRestaurants;
     private IRestaurantListClickListener mListener;
@@ -75,15 +72,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.FeedViewHolder
             restaurantName.setText(restaurant.getName());
             restaurantAddress.setText(restaurant.getAddress());
             restaurantDetails.setText(String.format(itemView.getContext().getString(R.string
-                            .txt_established_on), restaurant.getEstablished()));
+                    .txt_established_on), restaurant.getEstablished()));
             Picasso.with(restaurantImage.getContext())
                     .load(restaurant.getPic())
                     .placeholder(R.mipmap.ic_launcher)
                     .centerCrop().fit().into(restaurantImage);
 
+
             RxView.clicks(mCardView)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
                     .throttleFirst(1000, TimeUnit.MILLISECONDS)
                     .subscribe(o -> mListener.onRestaurantClicked(restaurant),
                             throwable -> Log.e("Adapter", "bind: error"));
