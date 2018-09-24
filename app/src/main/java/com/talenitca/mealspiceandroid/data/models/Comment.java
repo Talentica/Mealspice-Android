@@ -3,7 +3,6 @@ package com.talenitca.mealspiceandroid.data.models;
 
 import com.google.gson.annotations.SerializedName;
 
-
 public class Comment {
 
     @SerializedName("body")
