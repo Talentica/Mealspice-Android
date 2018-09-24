@@ -74,4 +74,8 @@ dependencies {
     // Leak Canary for Memory leak detection
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+
+    //AdMob
+    implementation 'com.google.android.gms:play-services-ads:15.0.0'
+
 }

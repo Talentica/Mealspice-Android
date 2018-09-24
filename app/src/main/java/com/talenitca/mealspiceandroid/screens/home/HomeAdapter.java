@@ -14,40 +14,75 @@ import android.widget.TextView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.squareup.picasso.Picasso;
 import com.talenitca.mealspiceandroid.R;
+import com.talenitca.mealspiceandroid.data.models.ListItem;
 import com.talenitca.mealspiceandroid.data.models.Restaurant;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.FeedViewHolder> {
-    private List<Restaurant> mRestaurants;
+public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private List<ListItem> mItemList;
     private IRestaurantListClickListener mListener;
+
+    //two types of view
+    public static final int ITEM_TYPE_LIST = 0;
+    public static final int ITEM_TYPE_NATIVE_AD= 1;
 
     public HomeAdapter(IRestaurantListClickListener listener) {
         mListener = listener;
     }
 
-    public void setData(List<Restaurant> restaurants) {
-        this.mRestaurants = restaurants;
+    public void setData(List<ListItem> listItems) {
+        this.mItemList = listItems;
         notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        ListItem recyclerViewItem = mItemList.get(position);
+        return recyclerViewItem.getType();
     }
 
     @NonNull
     @Override
-    public FeedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.feed_item, parent, false);
-        return new FeedViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        switch (viewType) {
+            case ITEM_TYPE_NATIVE_AD:
+                View unifiedNativeLayoutView = LayoutInflater.from(
+                        parent.getContext()).inflate(R.layout.native_ad_item,
+                        parent, false);
+                return new NativeAdViewHolder(unifiedNativeLayoutView);
+            case ITEM_TYPE_LIST:
+            default:
+                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+                View view = inflater.inflate(R.layout.feed_item, parent, false);
+                return new FeedViewHolder(view);
+        }
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull FeedViewHolder holder, int position) {
-        if (mRestaurants != null) holder.bind(mRestaurants.get(position));
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        int viewType = getItemViewType(position);
+        if(mItemList== null) {
+            return;
+        }
+        if(viewType == ITEM_TYPE_LIST) {
+            ListItem listItem = mItemList.get(position);
+            if(listItem != null) {
+                ((FeedViewHolder) holder).bind(listItem.getRestaurant());
+            }
+        } else if(viewType== ITEM_TYPE_NATIVE_AD) {
+            ListItem listItem = mItemList.get(position);
+            if(listItem != null) {
+                ((NativeAdViewHolder) holder).populateNativeAdView(listItem.getNativeAd());
+            }
+        }
     }
 
     @Override
     public int getItemCount() {
-        return mRestaurants == null ? 0 : mRestaurants.size();
+        return mItemList == null ? 0 : mItemList.size();
     }
 
     class FeedViewHolder extends RecyclerView.ViewHolder {
